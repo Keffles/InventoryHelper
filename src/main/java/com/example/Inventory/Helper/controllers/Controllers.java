@@ -1,64 +1,96 @@
 package com.example.Inventory.Helper.controllers;
 
+import com.example.Inventory.Helper.dao.dairyDao;
+import com.example.Inventory.Helper.models.Dairy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.example.Inventory.Helper.dao.dairyDao;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class Controllers {
-    @RequestMapping(value = "")
-    @ResponseBody
+
+    @Autowired// look this shit up later
+    public dairyDao dairyDao;
+    //  returns a webpage at localhost:8080  it's the GET method that calls the templates.  the Request Map sets what method
+    @RequestMapping(value = "/" , method = RequestMethod.GET)
     public String index(){
-        return "Welcome to inventory helper";
+        return "index";
     }
 
-    @RequestMapping(value = "Dairy")
-    @ResponseBody
+    /*
+    DONE Have a page with "Enter the number of milks pulled
+    Update that page to have a place to type in the number and a button
+    Have a page that accepts the result when the page above clicks the button
+    Save the result to a List or HashMap of StockingEvents
+
+
+    PARAMS set the name of the button.  It is needed because if we don't have it
+    it won't know what button to use. This way we can use multiple buttons without
+    tons of hassle.  So every button doesn't need its own form to keep it straight.
+     */
+    @RequestMapping(value = "/", params="Dairy", method= RequestMethod.POST)
     public String DairyController(){
-        return "Enter the number of milks pulled for each type below";
+        return "DairyPull";
+    }
+
+    @RequestMapping(value="/", method = RequestMethod.POST)
+    public String dairyPUll(ServletRequest request, Model model, @RequestParam(required = false) List<Integer> num){
+
+        List<Dairy> dairyList = (List<Dairy>)dairyDao.findAll();
+
+        model.addAttribute("dairyList", dairyList);
+
+        String msg = num.toString();
+        model.addAttribute("msg", msg);
+        return "redirect:/DairyPull";
     }
 
     @RequestMapping(value = "Pastries")
-    @ResponseBody
     public String PastriesController(){return "Enter the number of pastries pulled for each value below";}
 
-    @RequestMapping(value = "Coffee")
-    @ResponseBody
+    @RequestMapping(value = "NonDairyCategories/Coffee")
     public String CoffeeController(){return "Enter the number of units pulled for each type of coffee below";}
 
-    @RequestMapping(value = "Cups")
-    @ResponseBody
+    @RequestMapping(value = "NonDairyCategories/Cups")
     public String CupsController(){return "Enter the number of sleeves pulled for each size of cup below";}
 
     @RequestMapping(value = "Inclusions")
-    @ResponseBody
     public String InclusionsController(){return "Enter the number of Inclusions pulled below.";}
 
-    @RequestMapping(value = "Syrups")
-    @ResponseBody
-    public String SyrupsController(){return "Enter the number of Syrups pulled for each type below";}
+    @RequestMapping(value = "NonDairyCategories/Syrups")
+    public String SyrupsController(){
+    return "Enter the number of Syrups pulled for each type below";}
 
     @RequestMapping(value = "Refreshers")
-    @ResponseBody
     public String RefreshersController(){return "Enter the number of refreshers pulled for each type below";}
 
-    @RequestMapping(value = "Oatmeal")
-    @ResponseBody
+    @RequestMapping(value = "NonDairyCategories/Oatmeal")
     public String OatmealController(){return "Enter the number of oatmeal components pulled below";}
 
 
-    @RequestMapping(value = "Tea")
-    @ResponseBody
+    @RequestMapping(value = "NonDairyCategories/Tea")
     public String TeaController(){return "Enter the number of teas pulled below.  Iced tea is per box, hot tea bags are per unit";}
 
     @RequestMapping(value = "Sandwich")
-    @ResponseBody
     public String SandwichController(){return "Enter the number of Sandwiches, egg bites and wraps pulled below";}
 
 
+    /*
+    go through the list of saved stocking events and print to the console
+    * */
     @RequestMapping(value = "Inventory")
-    @ResponseBody
-    public String InventoryController(){return "Below lists current inventory numbers";}
+    public String InventoryController(){
+        System.out.println("Print to console here");
+        return "Below lists current inventory numbers";}
 
 
 

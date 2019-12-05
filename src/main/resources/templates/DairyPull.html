@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>"Dairy Pull Chart"</title>
+</head>
+<header>
+    <h1>Dairy Pull Chart</h1>
+    <p>Please mark the number of milks pulled below:</p>
+</header>
+<body>
+<h2>Dairy Pull Chart</h2>
+<form method="post">
+<table>
+    <tr>
+        <th>Type of Milk</th>
+        <th>Number Pulled</th>
+        <th>Total Pulled</th>
+    </tr>
+    <tr th:each="entry :${dairyList}">
+        <td th:text="${entry.name}"> </td>
+        <td><input type="number" name="num" id="num"/></td>
+        <td th:text="{$entry.totalPulled}"></td>
+    </tr>
+
+</table>
+    <button type="submit">Submit</button>
+</form>
+<!--<table>-->
+<!--&lt;!&ndash;    <tr><th>Milk</th><th>Pull</th><th>Chart</th></tr>&ndash;&gt;-->
+<!--    <tr> <td>Whole Milk</td>-->
+<!--        <td>2%</td>-->
+<!--        <td>Nonfat</td></tr>-->
+
+<!--</table>-->
+</body>
+<span th:text="${msg}"></span>
+</html>
