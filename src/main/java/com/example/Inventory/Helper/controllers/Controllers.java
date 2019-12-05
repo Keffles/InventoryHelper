@@ -37,22 +37,27 @@ public class Controllers {
     it won't know what button to use. This way we can use multiple buttons without
     tons of hassle.  So every button doesn't need its own form to keep it straight.
      */
-    @RequestMapping(value = "/", params="Dairy", method= RequestMethod.POST)
-    public String DairyController(){
-        return "DairyPull";
-    }
-
-    @RequestMapping(value="/", method = RequestMethod.POST)
-    public String dairyPUll(ServletRequest request, Model model, @RequestParam(required = false) List<Integer> num){
+    @RequestMapping(value = "/DairyPull", method= RequestMethod.GET)
+    public String dairyPUll(ServletRequest request, Model model){
 
         List<Dairy> dairyList = (List<Dairy>)dairyDao.findAll();
 
         model.addAttribute("dairyList", dairyList);
 
-        String msg = num.toString();
-        model.addAttribute("msg", msg);
         return "redirect:/DairyPull";
     }
+
+//    @RequestMapping(value="/", method = RequestMethod.POST)
+//    public String dairyPUll(ServletRequest request, Model model, @RequestParam(required = false) List<Integer> num){
+//
+//        List<Dairy> dairyList = (List<Dairy>)dairyDao.findAll();
+//
+//        model.addAttribute("dairyList", dairyList);
+//
+//        String msg = num.toString();
+//        model.addAttribute("msg", msg);
+//        return "redirect:/DairyPull";
+//    }
 
     @RequestMapping(value = "Pastries")
     public String PastriesController(){return "Enter the number of pastries pulled for each value below";}
