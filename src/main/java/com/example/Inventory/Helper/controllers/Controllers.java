@@ -42,16 +42,16 @@ public class Controllers {
         return "DairyPull";
     }
 
-    @RequestMapping(value="/", method = RequestMethod.POST)
-    public String dairyPUll(ServletRequest request, Model model, @RequestParam(required = false) List<Integer> num){
-
-        List<Dairy> dairyList = (List<Dairy>)dairyDao.findAll();
-
+    @RequestMapping(value="/DairyPull", method = RequestMethod.GET)
+    public String dairyPullGet(Model model){
+        List<Dairy> dairyList = dairyDao.findAll();
         model.addAttribute("dairyList", dairyList);
+        return "DairyPull";
+    }
 
-        String msg = num.toString();
-        model.addAttribute("msg", msg);
-        return "redirect:/DairyPull";
+    @RequestMapping(value="/error", method = RequestMethod.GET)
+    public String error () {
+        return "error";
     }
 
     @RequestMapping(value = "Pastries")

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org/">
+<html xmlns:th="http://www.thymeleaf.org/" lang="eng">
 
 <html lang="en">
 <head>
@@ -12,20 +12,31 @@
 </header>
 <body>
 <h2>Dairy Pull Chart</h2>
-<form method="post">
+
 <table>
     <tr>
-        <th>Type of Milk</th>
-        <th>Number Pulled</th>
-        <th>Total Pulled</th>
+        <td>Name</td><td>Amount Pulled</td><td>Total Pulled</td>
     </tr>
-    <tr th:each="entry :${dairyList}">
-        <td th:text="${entry.name}"> </td>
-        <td><input type="number" name="num" id="num"/></td>
-        <td th:text="{$entry.totalPulled}"></td>
+    <tr th:each="entry: ${dairyList}">
+        <td th:text="${entry.name}" />
+        <td th:text="${entry.amountPulled}" />
     </tr>
-
 </table>
+
+<form method="post">
+<!--<table>-->
+<!--    <tr>-->
+<!--        <th>Type of Milk</th>-->
+<!--        <th>Number Pulled</th>-->
+<!--        <th>Total Pulled</th>-->
+<!--    </tr>-->
+<!--    <tr th:each="entry :${dairyList}">-->
+<!--        <td th:text="${entry.name}"> </td>-->
+<!--        <td><input type="number" name="num" id="num"/></td>-->
+<!--        <td th:text="{$entry.totalPulled}"></td>-->
+<!--    </tr>-->
+
+<!--</table>-->
     <button type="submit">Submit</button>
 </form>
 <!--<table>-->
@@ -36,5 +47,5 @@
 
 <!--</table>-->
 </body>
-<span th:text="${msg}"></span>
+<!--<span th:text="${msg}"></span>-->
 </html>

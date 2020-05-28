@@ -16,6 +16,10 @@ public class Dairy extends Item {
     @Column(name="TotalPulled")
     private int totalPulled;
 
+    @NotNull
+    @Column(name="name")
+    private String name;
+
     public void item( int amountPulled){
         this.setTotalPulled(this.getTotalPulled() + amountPulled);
         // same as this.totalPUlled = this.totalPulled + amountPulled
@@ -37,5 +41,15 @@ public class Dairy extends Item {
 
     protected void setTotalPulled(int totalPulled) {
         this.totalPulled = totalPulled;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
     }
 }
